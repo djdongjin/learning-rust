@@ -8,17 +8,39 @@ async fn main() {
     loop {
         // ignore socketAddr returned by `accept` for now.
         let (socket, _) = listener.accept().await.unwrap();
-        process(socket).await;
+        // tokio::spawn accepts a `async` block and returns a `JoinHandle`.
+        // if there are values returned, call `await` on the `JoinHandle`.
+        tokio::spawn(async move {
+            process(socket).await;
+        });
     }
 }
 
 async fn process(socket: TcpStream) {
-    let mut conn = Connection::new(socket);
-    if let Some(frame) = conn.read_frame().await.unwrap() {
-        println!("GOT: {:?}", frame);
+    use mini_redis::Command::{self, Get, Set};
+    use std::collections::HashMap;
 
-        // respond error for now before adding logic.
-        let resp = Frame::Error("unimplemented".to_string());
+    let mut db = HashMap::new();
+
+    let mut conn = Connection::new(socket);
+
+    // use `while let` so that more than one command can be accepted in a connection.
+    while let Some(frame) = conn.read_frame().await.unwrap() {
+        let resp = match Command::from_frame(frame).unwrap() {
+            Set(cmd) => {
+                db.insert(cmd.key().to_string(), cmd.value().to_vec());
+                Frame::Simple("OK".to_string())
+            },
+            Get(cmd) => {
+                if let Some(value) = db.get(cmd.key()) {
+                    Frame::Bulk(value.clone().into())
+                } else {
+                    Frame::Null
+                }
+            },
+            cmd => panic!("unimplemented {:?}", cmd),
+        };
+
         conn.write_frame(&resp).await.unwrap();
     }
 }
