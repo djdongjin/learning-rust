@@ -4,7 +4,7 @@ This repository mainly records some resources that I use to learning rust langua
 
 Book/Document:
 
-- [ ] The Rust Programming Book. (Ch. 15 done)
+- [x] The Rust Programming Book.
 - [ ] tokio document
 - [ ] Rust for Rustaceans.
 
