@@ -1,4 +1,12 @@
 [workspace]
 members = [
     "tokio_doc/my_redis",
+    "rust_book/concurrency",
+    "rust_book/generic_example",
+    "rust_book/guessing_game",
+    "rust_book/hello_server",
+    "rust_book/minigrep",
+    "rust_book/resaurant",
+    "rust_book/trait_example",
+    "rust_book/trait_oop",
 ]
