@@ -9,4 +9,5 @@ members = [
     "rust_book/resaurant",
     "rust_book/trait_example",
     "rust_book/trait_oop",
+    "playground/async_await",
 ]
