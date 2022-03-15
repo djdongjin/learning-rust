@@ -12,4 +12,5 @@ members = [
     "playground/async_await",
 
     "crust_of_rust/strsplit",   # lifetime annotation.
+    "crust_of_rust/vecmac", # declarative macros.
 ]
