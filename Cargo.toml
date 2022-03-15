@@ -13,4 +13,5 @@ members = [
 
     "crust_of_rust/strsplit",   # lifetime annotation.
     "crust_of_rust/vecmac", # declarative macros.
+    "crust_of_rust/iterators" # iterators.
 ]
