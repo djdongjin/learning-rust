@@ -1,5 +1,12 @@
 # Learning Rust
 
+---
+TODO:
+
+- [ ] Complete this [README](crust_of_rust/call_me/README.md) related to functions.
+
+---
+
 This repository mainly records some resources that I use to learning rust language, and some practice code.
 
 Book/Document:
@@ -19,3 +26,4 @@ Project:
 
 - [ ] Tokio
 - [ ] TiKV
+- [ ] Linkerd
